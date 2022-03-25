@@ -1,0 +1,6 @@
+body {
+  min-width: 24rem; /* your desired width */
+  max-width: 100%;
+  position: relative;
+  vertical-align: middle;
+}

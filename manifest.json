@@ -1,16 +1,22 @@
 {
-  "name": "Extension try",
-  "version": "0.1.0",
-  "description": "--",
+  "name": "Snoop Follow",
+  "version": "1.0",
+  "description": "This extension allows you to follow artists on openSea!",
   "content_scripts": [
     {
       "matches": ["https://opensea.io/*"],
-      "js": ["contentScript.js"],
-      "css": ["contentScript.css"],
+      "js": ["/injects/contentScript.js"],
+      "css": ["/injects/contentScript.css"],
       "run_at": "document_end"
     }
   ],
+  "browser_action": {
+    "default_title": "Snoop",
+    "default_popup": "/popup/popup.html"
+  },
   "manifest_version": 2,
-  "background": { "service_worker": "contentScript.js" },
+  "background": {
+    "scripts": ["/popup/popup.js"]
+  },
   "permissions": ["storage"]
 }
