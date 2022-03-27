@@ -1,20 +1,21 @@
-const submitBtn = document.getElementById("submit_button");
-const inputNewItem = document.getElementById("input");
+const emailForm = document.querySelector('.email-form');
+const inputNewItem = document.getElementById('input');
+const errorMsg = document.querySelector('.error-message');
 
-var email = "hi";
+var email = '';
 
-const standardized = (str) => str.toLowerCase();
+const standardized = str => str.toLowerCase();
 
 const setMail = function (e) {
   e.preventDefault();
 
-  if (inputNewItem.value !== "") {
-    email = standardized(inputNewItem.value);
+  if (inputNewItem.value === '') {
+    errorMsg.innerText = 'Email not found!';
   }
-  inputNewItem.value = "";
+  email = standardized(inputNewItem.value);
+  inputNewItem.value = '';
 
   console.log(email);
 };
-console.log(email);
-console.log("g");
-submitBtn.addEventListener("click", setMail);
+
+emailForm.addEventListener('submit', setMail);
