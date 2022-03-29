@@ -16,7 +16,7 @@
   },
   "manifest_version": 2,
   "background": {
-    "scripts": ["/popup/popup.js"]
+    "scripts": ["/popup/index.js", "/popup/popup.js"]
   },
-  "permissions": ["storage"]
+  "permissions": ["storage", "/popup/index.html"]
 }

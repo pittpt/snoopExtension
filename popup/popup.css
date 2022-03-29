@@ -1,6 +1,6 @@
 body {
   background-color: #c7cdec;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   min-width: 24rem; /* your desired width */
   max-width: 100%;
   position: relative;
@@ -63,4 +63,8 @@ body {
   padding: 0;
   margin: 0;
   margin-left: 0.2rem;
+}
+
+#logout {
+  cursor: pointer;
 }
