@@ -1,7 +1,4 @@
 const express = require("express");
-const { type } = require("express/lib/response");
-const res = require("express/lib/response");
-const { collection } = require("../models/model");
 const router = express.Router();
 const Model = require("../models/model");
 var MongoClient = require("mongodb").MongoClient;
@@ -67,6 +64,21 @@ router.delete("/unfollow", (req, res) => {
     else res.send("not deleted");
   });
 });
+
+router.get("/getFollows/:id", async (req, res) => {
+  const user = req.params.id;
+
+  MongoClient.connect(url, async (err, db) => {
+    //add find,if found return error (do this if wanna return acc existed)
+    if (err) throw err;
+    var dbo = db.db("users");
+
+    const result = await dbo.collection(user).find().toArray();
+    console.log(result);
+    res.send(result);
+  });
+});
+
 //
 //
 //
