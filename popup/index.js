@@ -1,8 +1,14 @@
 const inputNewItem = document.getElementById("emailText");
-const logout = (document.getElementById("logout").onclick = () => {
-  logOut();
-});
-// logout.addEventListener("click", logOut);
+// import mongoose from "mongoose";
+
+// mongoose
+//   .connect(process.env.MONGODB_CONNECT || "")
+//   .then(() => {
+//     console.log("Connected to MongoDB successfully");
+//   })
+//   .catch((err) => {
+//     console.log("Failed to connect with MongoDB " + err);
+//   });
 
 chrome.storage.local.get(["userMail"], (data) => {
   inputNewItem.innerHTML = data.userMail;
@@ -17,3 +23,7 @@ const logOut = () => {
   });
   window.location.href = "/popup/popup.html";
 };
+const logout = (document.getElementById("logout").onclick = () => {
+  logOut();
+});
+// logout.addEventListener("click", logOut);

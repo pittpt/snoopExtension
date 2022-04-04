@@ -18,5 +18,5 @@
   "background": {
     "scripts": ["/popup/index.js", "/popup/popup.js"]
   },
-  "permissions": ["storage", "/popup/index.html"]
+  "permissions": ["storage"]
 }

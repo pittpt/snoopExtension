@@ -12,6 +12,15 @@ const init = function () {
 };
 init();
 
+// chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+//   console.log(changeInfo.status);
+//   if (changeInfo.status === "completed") {
+//     if (tab.url === "https://opensea.io/") {
+//       chrome.tabs.reload();
+//     }
+//   }
+// });
+
 //get address
 const webData = document
   .getElementById("__NEXT_DATA__")
