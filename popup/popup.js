@@ -1,29 +1,26 @@
 const emailForm = document.querySelector(".email-form");
 const inputNewItem = document.getElementById("input");
 const errorMsg = document.querySelector(".error-message");
-// const mongo = require("/database/mongo");
 
+var bg = chrome.extension.getBackgroundPage();
 var email = "";
 const standardized = (str) => str.toLowerCase();
 
-async function main() {
-  const url =
-    "mongodb+srv://snoop:snoopdatabase@cluster0.kmktr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-  const client = new MongoClient(url);
-
-  try {
-    await client.connect();
-  } catch (e) {
-    console.error(e);
-  } finally {
-    await client.close();
-  }
-}
+const url = "http://localhost:3000/api";
+const options = {
+  method: "POST",
+  withCredentials: false,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+};
 
 const init = () => {
-  chrome.storage.local.get(["logIn"], (data) => {
+  chrome.storage.local.get(["logIn", "userMail"], async (data) => {
     if (data.logIn == true) {
-      console.log(data.userMail);
+      // bg.console.log(data.userMail + " INIT");
+      await fetch(url + `/newUser/${data.userMail}`, options);
       window.location.href = "/popup/index.html";
     }
   });
@@ -37,11 +34,13 @@ const setMail = (e) => {
   } else {
     email = standardized(inputNewItem.value);
     chrome.storage.local.set({ userMail: email }, () => {
+      localStorage.setItem("userMail", {
+        userMail: email,
+      });
       init();
-      // main().catch(console.error);
     });
     chrome.storage.local.set({ logIn: true }, () => {
-      console.log("logged in");
+      // bg.console.log("logged in");
     });
   }
 

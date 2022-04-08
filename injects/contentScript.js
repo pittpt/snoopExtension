@@ -1,5 +1,7 @@
 //set follow button
 const init = function () {
+  // await getMail();
+  // console.log(email);
   // var thisDiv = document.getElementsByClassName("Blockreact__Block-sc-1xf18x6-0 Flexreact__Flex-sc-1twd32i-0 gbiTQT jYqxGr");
   const titleAdd = document.createElement("button");
   titleAdd.id = "follow-button";
@@ -35,10 +37,40 @@ for (let i in webData) {
   }
 }
 
+//get user email
+var email;
+chrome.storage.local.get(["userMail"], (data) => {
+  console.log(data.userMail);
+  email = data.userMail;
+});
+
+//api routes
+const url = "http://localhost:3000/api";
+const follow = {
+  method: "POST",
+  withCredentials: false,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    email: email,
+    adrs: address,
+  }),
+};
+const unfollow = {
+  method: "DELETE",
+  withCredentials: false,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+};
+
 //follow functions
 var followBut = document.getElementById("follow-button");
 var following = false;
-document.getElementById("follow-button").onclick = () => {
+document.getElementById("follow-button").onclick = async () => {
   //   console.log("click");
   //   console.log(webData[155]);
   //   console.log(webData);
@@ -53,14 +85,7 @@ document.getElementById("follow-button").onclick = () => {
     followBut.style.borderColor = "rgb(97, 167, 238)";
     // console.log("follow");
     following = true;
-
-    chrome.storage.local.set({ address: address }, () => {
-      console.log(address);
-    });
-    chrome.storage.local.get(["address"], (data) => {
-      console.log(data);
-      console.log(data.adrs);
-    });
+    await fetch(url + "/follow", follow);
     // walletIds.push(address);
     // console.log(walletIds[walletIds.length - 1]);
     // console.log(walletIds.length);
@@ -68,6 +93,7 @@ document.getElementById("follow-button").onclick = () => {
   //to unfolow >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   else {
     // followBut.classList.remove("followed");
+    await fetch(url + `/unfollow/${email}/${address}`, unfollow);
     followBut.innerHTML = "+ Follow";
     followBut.style.color = "#3399ff";
     followBut.style.backgroundColor = "#ffffff";
