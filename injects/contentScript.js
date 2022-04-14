@@ -12,10 +12,10 @@ const init = function () {
   // injectElement.innerHTML = "Hello From the Rusty Zone Element";
   document.getElementsByClassName('gbiTQT jYqxGr')[0].prepend(titleAdd)
   checkFollowing()
+  followFunction()
 }
 
-// window.addEventListener('load', init)
-window.addEventListener('load', checkFollowing)
+window.addEventListener('load', init)
 
 // chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 //   console.log(changeInfo.status);
@@ -71,40 +71,44 @@ const unfollow = {
 }
 
 //follow functions
-var followBut = document.getElementById('follow-button')
-var following = false
-document.getElementById('follow-button').onclick = async () => {
-  //   console.log("click");
-  //   console.log(webData[155]);
-  //   console.log(webData);
-  //   console.log(address);
+function followFunction() {
+  console.log('fuck')
+  var followBut = document.getElementById('follow-button')
+  var following = false
 
-  //to follow >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  if (following == false) {
-    // followBut.classList.add("followed");
-    followBut.innerHTML = 'Following'
-    followBut.style.color = '#ffffff'
-    followBut.style.backgroundColor = 'rgb(97, 167, 238)'
-    followBut.style.borderColor = 'rgb(97, 167, 238)'
-    // console.log("follow");
-    following = true
-    await fetch(url + '/follow', follow)
-    // walletIds.push(address);
-    // console.log(walletIds[walletIds.length - 1]);
-    // console.log(walletIds.length);
-  }
-  //to unfolow >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  else {
-    // followBut.classList.remove("followed");
-    await fetch(url + `/unfollow/${email}/${address}`, unfollow)
-    followBut.innerHTML = '+ Follow'
-    followBut.style.color = '#3399ff'
-    followBut.style.backgroundColor = '#ffffff'
-    followBut.style.borderColor = '#3399ff'
-    following = false
+  followBut.addEventListener('click', async function () {
+    //   console.log("click");
+    //   console.log(webData[155]);
+    //   console.log(webData);
+    //   console.log(address);
 
-    // console.log("unfollow");
-  }
+    //to follow >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    if (following == false) {
+      // followBut.classList.add("followed");
+      followBut.innerHTML = 'Following'
+      followBut.style.color = '#ffffff'
+      followBut.style.backgroundColor = 'rgb(97, 167, 238)'
+      followBut.style.borderColor = 'rgb(97, 167, 238)'
+      // console.log("follow");
+      following = true
+      await fetch(url + '/follow', follow)
+      // walletIds.push(address);
+      // console.log(walletIds[walletIds.length - 1]);
+      // console.log(walletIds.length);
+    }
+    //to unfolow >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    else {
+      // followBut.classList.remove("followed");
+      await fetch(url + `/unfollow/${email}/${address}`, unfollow)
+      followBut.innerHTML = '+ Follow'
+      followBut.style.color = '#3399ff'
+      followBut.style.backgroundColor = '#ffffff'
+      followBut.style.borderColor = '#3399ff'
+      following = false
+
+      // console.log("unfollow");
+    }
+  })
 }
 
 // Check Already Followed
@@ -119,6 +123,8 @@ async function checkFollowing() {
     },
   }
 
-  const { data } = await fetch(url + `/find/${email}/${address}`, getFollowing)
+  console.log(email, address)
+
+  const data = await fetch(url + `/find/${email}/${address}`, getFollowing)
   console.log(data)
 }
