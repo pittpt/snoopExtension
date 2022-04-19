@@ -34,9 +34,9 @@ const setMail = (e) => {
   } else {
     email = standardized(inputNewItem.value);
     chrome.storage.local.set({ userMail: email }, () => {
-      localStorage.setItem("userMail", {
-        userMail: email,
-      });
+      // localStorage.setItem("userMail", {
+      //   userMail: email,
+      // });
       init();
     });
     chrome.storage.local.set({ logIn: true }, () => {

@@ -58,6 +58,24 @@ body {
   opacity: 0.8;
 }
 
+.btn--activate {
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: #dfac22;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  color: #fff;
+  border: 1px solid #cc9e1f;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn--activate:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 .error-message {
   color: rgb(253, 75, 75);
   padding: 0;
